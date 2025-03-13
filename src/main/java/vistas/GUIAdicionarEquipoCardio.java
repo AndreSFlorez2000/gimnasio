@@ -13,11 +13,8 @@ import javax.swing.JOptionPane;
  * @author Alexander
  */
 public class GUIAdicionarEquipoCardio extends javax.swing.JFrame {
- private final EquipoController equipoController = new EquipoController();
-
+    private EquipoController equipoController = EquipoController.getInstancia();
     
-   
-  
     /**
      * Creates new form GUIAdicionarNoPerecedero
      */

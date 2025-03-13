@@ -5,25 +5,23 @@
 package vistas;
 import controlador.EquipoController;
 import javax.swing.JOptionPane;
-import model.EquipoGimnasio;
+import model.Equipo;
 
 /**
  *
  * @author Rafa
  */
 public class GUIBuscar extends javax.swing.JFrame {
-    
-    private EquipoController equipoController;
-    
+    private EquipoController equipoController = EquipoController.getInstancia();
 
     /**
      * Creates new form GUIBuscar
      */
     public GUIBuscar(EquipoController equipoController) {
-    initComponents();
-    setLocationRelativeTo(null);
-    this.equipoController = equipoController; // Asignamos el controlador
-    jButtonBuscar.addActionListener(e -> jButtonBuscarActionPerformed(e)); // Para conectar el botón
+        initComponents();
+        this.equipoController = EquipoController.getInstancia();
+        jButtonBuscar.addActionListener(e -> jButtonBuscarActionPerformed(e));
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -102,7 +100,7 @@ public class GUIBuscar extends javax.swing.JFrame {
             return;
         }
 
-        EquipoGimnasio equipo = equipoController.buscarEquipo(nombre);
+        Equipo equipo = equipoController.buscarEquipo(nombre);
 
         if (equipo != null) {
             JOptionPane.showMessageDialog(this, 

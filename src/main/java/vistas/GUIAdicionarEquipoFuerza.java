@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Alexander
  */
 public class GUIAdicionarEquipoFuerza extends javax.swing.JFrame {
-    private final EquipoController equipoController = new EquipoController();
+    private EquipoController equipoController = EquipoController.getInstancia();
 
 
     /**

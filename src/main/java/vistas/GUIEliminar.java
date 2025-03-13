@@ -12,13 +12,19 @@ import javax.swing.JOptionPane;
  */
 public class GUIEliminar extends javax.swing.JFrame {
     
-    private EquipoController equipoController; 
+    private EquipoController equipoController = EquipoController.getInstancia();
     /**
      * Creates new form GUIEliminar
      */
-    public GUIEliminar(EquipoController equipoController) {
-        this.equipoController = equipoController; // Inicializamos el controlador
+    public GUIEliminar() { 
         initComponents();
+        setLocationRelativeTo(null);
+    }
+
+    public GUIEliminar(EquipoController equipoController) { 
+        this.equipoController = EquipoController.getInstancia(); 
+        initComponents();
+        setLocationRelativeTo(null);
     }
     
     

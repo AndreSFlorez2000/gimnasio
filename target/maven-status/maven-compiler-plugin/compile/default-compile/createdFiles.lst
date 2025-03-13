@@ -5,7 +5,6 @@ vistas\GUIAdicionarEquipoFuerza$4.class
 vistas\GUIPrincipal$1.class
 vistas\GUIAdicionarEquipoGYM$1.class
 model\RutinaFuerza.class
-model\EquipoGimnasio.class
 vistas\GUIPrincipal$6.class
 vistas\GUIAdicionarEquipoCardio$1.class
 vistas\GUIAdicionarEquipoGYM.class
@@ -13,6 +12,8 @@ vistas\GUIPrincipal$8.class
 vistas\GUIAdicionarEquipoFuerza.class
 vistas\GUIListar.class
 vistas\GUIPrincipal.class
+exepciones\DatoInvalidoException.class
+model\Equipo.class
 com\mycompany\gym\GYM.class
 vistas\GUIAdicionarEquipoCardio$3.class
 vistas\GUIEliminar$1.class

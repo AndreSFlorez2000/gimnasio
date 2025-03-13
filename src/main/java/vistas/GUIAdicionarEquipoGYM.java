@@ -6,21 +6,20 @@ package vistas;
 
 import controlador.EquipoController;
 import javax.swing.JOptionPane;
-import model.EquipoGimnasio;
+import model.Equipo;
 
 /**
  *
  * @author Rafa
  */
 public class GUIAdicionarEquipoGYM extends javax.swing.JFrame {
-    private final EquipoController equipoController;
+    private EquipoController equipoController = EquipoController.getInstancia();
     /**
      * Creates new form GUIAdicionarNoPerecedero
      */
-    public GUIAdicionarEquipoGYM(EquipoController equipoController) {
+    public GUIAdicionarEquipoGYM() {
         initComponents();
         setLocationRelativeTo(null);
-        this.equipoController = equipoController;
     }
 
     /**
@@ -189,7 +188,7 @@ public class GUIAdicionarEquipoGYM extends javax.swing.JFrame {
     String marca = txtMarca.getText();
     String estado = txtEstado.getText();
 
-    equipoController.insertarEquipo(new EquipoGimnasio(nombre, marca, estado));
+    equipoController.insertarEquipo(new Equipo(nombre, marca, estado));
     JOptionPane.showMessageDialog(this, "Equipo de Gimnasio agregado con éxito");
     }//GEN-LAST:event_btnCrearEquipoGymActionPerformed
 

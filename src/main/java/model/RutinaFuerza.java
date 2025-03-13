@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author juana
+ * @author Rafa
  */
 public class RutinaFuerza extends EquipoFuerza{
     private String nombreRutina;
@@ -18,7 +18,7 @@ public class RutinaFuerza extends EquipoFuerza{
         this.nombreRutina = nombreRutina;
         this.series = series;
         this.repeticiones = repeticiones;
-}
+    }
 
     public String getNombreRutina() {
         return nombreRutina;

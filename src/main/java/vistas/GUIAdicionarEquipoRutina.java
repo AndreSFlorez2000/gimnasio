@@ -9,14 +9,13 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alexander
+ * @author Rafa
  */
 public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {    
-    private final EquipoController equipoController = new EquipoController();
-
+    private EquipoController equipoController = EquipoController.getInstancia();
 
     /**
-     * Creates new form GUIAdicionarNoPerecedero
+     * Creates new form GUIAdicionarEquipoRutina
      */
     public GUIAdicionarEquipoRutina() {
         initComponents();
@@ -41,12 +40,18 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
         ftxtMarca = new javax.swing.JFormattedTextField();
         lblPrecio = new javax.swing.JLabel();
         ftxtEstado = new javax.swing.JFormattedTextField();
-        lblCantidad = new javax.swing.JLabel();
+        lblTipoEjercicio = new javax.swing.JLabel();
         ftxtNRutina = new javax.swing.JFormattedTextField();
         lblCategoria = new javax.swing.JLabel();
         lblGarantia = new javax.swing.JLabel();
         ftxtRepeticiones = new javax.swing.JFormattedTextField();
         ftxtSeries = new javax.swing.JFormattedTextField();
+        lblCantidad1 = new javax.swing.JLabel();
+        ftxtTEjercicio = new javax.swing.JFormattedTextField();
+        lblTipoEjercicio1 = new javax.swing.JLabel();
+        lblMaterial = new javax.swing.JLabel();
+        ftxtPMax = new javax.swing.JFormattedTextField();
+        ftxtMaterial = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar rutina");
@@ -91,8 +96,8 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
         ftxtEstado.setFormatterFactory(null);
         ftxtEstado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCantidad.setText("Nombre Rutina");
+        lblTipoEjercicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTipoEjercicio.setText("Tipo de Ejercicio");
 
         ftxtNRutina.setFormatterFactory(null);
         ftxtNRutina.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
@@ -112,55 +117,98 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
         ftxtSeries.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
         ftxtSeries.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        lblCantidad1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCantidad1.setText("Nombre Rutina");
+
+        ftxtTEjercicio.setFormatterFactory(null);
+        ftxtTEjercicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblTipoEjercicio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTipoEjercicio1.setText("Peso Maximo");
+
+        lblMaterial.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMaterial.setText("Material");
+
+        ftxtPMax.setFormatterFactory(null);
+        ftxtPMax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        ftxtMaterial.setFormatterFactory(null);
+        ftxtMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout panelCrearLayout = new javax.swing.GroupLayout(panelCrear);
         panelCrear.setLayout(panelCrearLayout);
         panelCrearLayout.setHorizontalGroup(
             panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCategoria)
-                    .addComponent(lblNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                    .addComponent(lblCodigo)
-                    .addComponent(ftxtMarca)
-                    .addComponent(lblPrecio)
-                    .addComponent(ftxtEstado)
-                    .addComponent(lblCantidad)
-                    .addComponent(ftxtNRutina)
-                    .addComponent(lblGarantia)
-                    .addComponent(ftxtRepeticiones)
-                    .addComponent(ftxtSeries))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCrearLayout.createSequentialGroup()
+                        .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ftxtTEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ftxtPMax, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ftxtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(346, Short.MAX_VALUE))
+                    .addGroup(panelCrearLayout.createSequentialGroup()
+                        .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNombre)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(lblCodigo)
+                            .addComponent(ftxtMarca)
+                            .addComponent(lblPrecio)
+                            .addComponent(ftxtEstado)
+                            .addComponent(lblTipoEjercicio)
+                            .addComponent(lblTipoEjercicio1)
+                            .addComponent(lblMaterial))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCantidad1)
+                            .addComponent(ftxtNRutina, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategoria)
+                            .addComponent(ftxtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblGarantia)
+                            .addComponent(ftxtRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57))))
         );
         panelCrearLayout.setVerticalGroup(
             panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(lblNombre)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre)
+                    .addComponent(lblCantidad1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ftxtNRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblCodigo)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigo)
+                    .addComponent(lblCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ftxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ftxtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblPrecio)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecio)
+                    .addComponent(lblGarantia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(lblCantidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ftxtNRutina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ftxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ftxtRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ftxtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(lblGarantia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ftxtRepeticiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addComponent(lblTipoEjercicio)
+                .addGap(18, 18, 18)
+                .addComponent(ftxtTEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTipoEjercicio1)
+                .addGap(18, 18, 18)
+                .addComponent(ftxtPMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblMaterial)
+                .addGap(18, 18, 18)
+                .addComponent(ftxtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         scrollPanelCrear.setViewportView(panelCrear);
@@ -172,16 +220,16 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPanelCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                    .addComponent(btnCrearRutina, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
+                    .addComponent(scrollPanelCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addComponent(btnCrearRutina, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollPanelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(scrollPanelCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnCrearRutina)
                 .addContainerGap())
         );
@@ -213,6 +261,27 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
     } else {
         ftxtEstado.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY));
     }
+    
+    if (ftxtTEjercicio.getText().trim().isEmpty()) {
+        errores.append("Debe llenar el campo Tipo Ejercicio\n");
+        ftxtTEjercicio.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED));
+    } else {
+        ftxtTEjercicio.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY));
+    }
+
+    if (ftxtPMax.getText().trim().isEmpty()) {
+        errores.append("Debe llenar el campo Peso Maximo\n");
+        ftxtPMax.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED));
+    } else {
+        ftxtPMax.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY));
+    }
+
+    if (ftxtMaterial.getText().trim().isEmpty()) {
+        errores.append("Debe llenar el campo Material\n");
+        ftxtMaterial.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED));
+    } else {
+        ftxtMaterial.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY));
+    }
 
     if (ftxtNRutina.getText().trim().isEmpty()) {
         errores.append("Debe llenar el campo Nombre Rutina\n");
@@ -241,23 +310,37 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
         return;
     }    
     
-    String nombre = txtNombre.getText();
-    String marca = ftxtMarca.getText();
-    String estado = ftxtEstado.getText();
-    String nombreRutina = ftxtNRutina.getText();
-    double series = Double.parseDouble(ftxtSeries.getText());
-    String repeticiones = ftxtRepeticiones.getText();
-/*
-    equipoController.insertarEquipoRutina(nombre, marca, estado, nombreRutina, series, repeticiones);
-    JOptionPane.showMessageDialog(this, "Rutina agregada con éxito");
-*/
+    try {
+        String nombre = txtNombre.getText();
+        String marca = ftxtMarca.getText();
+        String estado = ftxtEstado.getText();
+        String tipoDeEjercicio = ftxtTEjercicio.getText();
+        double pesoMaximo = Double.parseDouble(ftxtPMax.getText());
+        String material = ftxtMaterial.getText();
+        String nombreRutina = ftxtNRutina.getText();
+        int series = Integer.parseInt(ftxtSeries.getText().trim());
+        int repeticiones = Integer.parseInt(ftxtRepeticiones.getText().trim());
+
+        equipoController.insertarEquipoRutina(nombre, marca, estado, tipoDeEjercicio, pesoMaximo, material, nombreRutina, series, repeticiones);
+
+        JOptionPane.showMessageDialog(this, "Rutina agregada con éxito");
+
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error: Ingresa valores numéricos en Peso Máximo, Series y Repeticiones", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     // Limpiar campos
     txtNombre.setText("");
     ftxtMarca.setText("");
     ftxtEstado.setText("");
+    ftxtTEjercicio.setText("");
+    ftxtPMax.setText("");
+    ftxtMaterial.setText("");
     ftxtNRutina.setText("");
     ftxtSeries.setText("");
     ftxtRepeticiones.setText("");
+    
+    
     }//GEN-LAST:event_btnCrearRutinaActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -269,15 +352,21 @@ public class GUIAdicionarEquipoRutina extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearRutina;
     private javax.swing.JFormattedTextField ftxtEstado;
     private javax.swing.JFormattedTextField ftxtMarca;
+    private javax.swing.JFormattedTextField ftxtMaterial;
     private javax.swing.JFormattedTextField ftxtNRutina;
+    private javax.swing.JFormattedTextField ftxtPMax;
     private javax.swing.JFormattedTextField ftxtRepeticiones;
     private javax.swing.JFormattedTextField ftxtSeries;
-    private javax.swing.JLabel lblCantidad;
+    private javax.swing.JFormattedTextField ftxtTEjercicio;
+    private javax.swing.JLabel lblCantidad1;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblGarantia;
+    private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblTipoEjercicio;
+    private javax.swing.JLabel lblTipoEjercicio1;
     private javax.swing.JPanel panelCrear;
     private javax.swing.JScrollPane scrollPanelCrear;
     private javax.swing.JTextField txtNombre;

@@ -15,9 +15,8 @@ import vistas.GUIPrincipal;
 public class GYM {
 
     public static void main(String[] args) {
-    EquipoController equipoController = new EquipoController(); // Creamos el controlador
-    GUIPrincipal gUIPrincipal = new GUIPrincipal(equipoController); // Lo pasamos como parámetro
-    gUIPrincipal.setLocationRelativeTo(null);
-    gUIPrincipal.setVisible(true);
+        GUIPrincipal gUIPrincipal = new GUIPrincipal(); // ✅ Llamamos al nuevo constructor sin parámetros
+        gUIPrincipal.setLocationRelativeTo(null);
+        gUIPrincipal.setVisible(true);
     }
 }

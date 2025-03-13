@@ -15,77 +15,74 @@ import model.*;
  * @author Rafa
  */
 public class GUIListar extends javax.swing.JFrame implements Observer {
-    private EquipoController equipoController;
+    private EquipoController equipoController = EquipoController.getInstancia();
     /**
      * Creates new form GUIListar
      */
-    public GUIListar() {
-       
-        initComponents();
-        equipoController = new EquipoController();
-        ajustarTabla();
-    }
+   
     public GUIListar(EquipoController equipoController) {
-        
-       this.equipoController = equipoController; 
-        initComponents(); 
-        ajustarTabla(); 
-        llenarTabla();
-        equipoController.agregarObservador(this);
-        System.out.println("La ventana GUIListar se ha registrado como Observer");
+       this.equipoController = EquipoController.getInstancia(); 
+       initComponents(); 
+       setLocationRelativeTo(null);
+       ajustarTabla(); 
+       llenarTabla();
+       equipoController.agregarObservador(this);
+       System.out.println("La ventana GUIListar se ha registrado como Observer");
+       
     }
     
     public void llenarTabla() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Limpiamos la tabla antes de llenarla
 
-        List<EquipoGimnasio> listaEquipos = equipoController.listarEquipos();
+        List<Equipo> listaEquipos = equipoController.listarEquipos();
         System.out.println("Equipos en la lista:");
-        for (EquipoGimnasio equipo : listaEquipos) {
+
+        for (Equipo equipo : listaEquipos) {
             System.out.println(equipo.getNombre() + " - " + equipo.getClass().getSimpleName());
-        }
 
-        for (EquipoGimnasio equipo : listaEquipos) {
-            Object[] rowData = new Object[12]; // Columnas en la tabla
+            Object[] rowData = new Object[13]; // Aumentamos una columna más
 
-            rowData[0] = equipo.getNombre();
-            rowData[1] = equipo.getMarca();
-            rowData[2] = equipo.getEstado();
+            rowData[0] = equipo.getClass().getSimpleName(); // 🔥 Agrega el tipo de equipo
+            rowData[1] = equipo.getNombre();
+            rowData[2] = equipo.getMarca();
+            rowData[3] = equipo.getEstado();
 
             if (equipo instanceof EquipoCardio) {
                 EquipoCardio eqCardio = (EquipoCardio) equipo;
-                rowData[3] = eqCardio.getVelocidadMaxima();
-                rowData[4] = eqCardio.getNivelResistencia();
-                rowData[5] = eqCardio.getTipoPantalla();
+                rowData[4] = eqCardio.getVelocidadMaxima();
+                rowData[5] = eqCardio.getNivelResistencia();
+                rowData[6] = eqCardio.getTipoPantalla();
             } else {
-                rowData[3] = rowData[4] = rowData[5] = null;
+                rowData[4] = rowData[5] = rowData[6] = null;
             }
 
             if (equipo instanceof EquipoFuerza) {
                 EquipoFuerza eqFuerza = (EquipoFuerza) equipo;
-                rowData[6] = eqFuerza.getTipoDeEjercicio();
-                rowData[7] = eqFuerza.getPesoMaximo();
-                rowData[8] = eqFuerza.getMaterial();
+                rowData[7] = eqFuerza.getTipoDeEjercicio();
+                rowData[8] = eqFuerza.getPesoMaximo();
+                rowData[9] = eqFuerza.getMaterial();
             } else {
-                rowData[6] = rowData[7] = rowData[8] = null;
+                rowData[7] = rowData[8] = rowData[9] = null;
             }
 
             if (equipo instanceof RutinaFuerza) {
                 RutinaFuerza rutina = (RutinaFuerza) equipo;
-                rowData[9] = rutina.getNombreRutina();
-                rowData[10] = rutina.getSeries();
-                rowData[11] = rutina.getRepeticiones();
+                rowData[10] = rutina.getNombreRutina();
+                rowData[11] = rutina.getSeries();
+                rowData[12] = rutina.getRepeticiones();
             } else {
-                rowData[9] = rowData[10] = rowData[11] = null;
+                rowData[10] = rowData[11] = rowData[12] = null;
             }
-            
+
             model.addRow(rowData);
         }
     }
     
     @Override
     public void actualizar() {
-        llenarTabla(); // Aquí le dices que se actualice automáticamente
+        System.out.println("¡Se ha llamado a actualizar()!");
+        llenarTabla(); 
     }
     
     private void ajustarTabla() {
@@ -123,13 +120,13 @@ public class GUIListar extends javax.swing.JFrame implements Observer {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Marca", "Estado", "Velocidad Maxima", "Nivel Resistencia", "Tipo Pantalla", "Tipo Ejercicio", "Peso Maximo", "Material", "Nombre Rutina", "Series", "Repeticiones"
+                "Equipo", "Nombre", "Marca", "Estado", "Velocidad Maxima", "Nivel Resistencia", "Tipo Pantalla", "Tipo Ejercicio", "Peso Maximo", "Material", "Nombre Rutina", "Series", "Repeticiones"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -148,8 +145,8 @@ public class GUIListar extends javax.swing.JFrame implements Observer {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 1038, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1332, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonListar)))
@@ -171,7 +168,9 @@ public class GUIListar extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,17 +185,29 @@ public class GUIListar extends javax.swing.JFrame implements Observer {
        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Limpia la tabla antes de listar
 
-        List<EquipoGimnasio> listaEquipos = equipoController.listarEquipos();
+        /**List<Equipo> listaEquipos = equipoController.listarEquipos();
         System.out.println("Total equipos en lista: " + listaEquipos.size());
 
-        for (EquipoGimnasio equipo : listaEquipos) {
+        for (Equipo equipo : listaEquipos) {
             System.out.println("Listando equipo: " + equipo.getNombre());
             model.addRow(new Object[]{
                 equipo.getNombre(),
                 equipo.getMarca(),
                 equipo.getEstado()
             });
-        }    
+        }**/
+        
+        List<Equipo> listaEquipos = equipoController.listarEquipos();
+            System.out.println("Total equipos en lista: " + listaEquipos.size());
+
+            for (Equipo equipo : listaEquipos) {
+                System.out.println("Listando equipo: " + equipo.getNombre() + " - Tipo: " + equipo.getClass().getSimpleName());
+                model.addRow(new Object[]{
+                    equipo.getNombre(),
+                    equipo.getMarca(),
+                    equipo.getEstado()
+                });
+            }
     }//GEN-LAST:event_jButtonListarActionPerformed
 
     /**
@@ -204,7 +215,7 @@ public class GUIListar extends javax.swing.JFrame implements Observer {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new GUIListar().setVisible(true);
+            new GUIListar(EquipoController.getInstancia()).setVisible(true);
         });
     }
 

@@ -13,20 +13,19 @@ import javax.swing.JOptionPane;
  * @author Rafa
  */
 public class GUIPrincipal extends javax.swing.JFrame {
-        
-    
     private EquipoController equipoController;
+    
+    
     private GUIListar listar;
     /**
      * Creates new form GUIPrincipal
      */
-    public GUIPrincipal(EquipoController equipoController) {
-        this.equipoController = equipoController;
-        this.listar = new GUIListar(equipoController);
+    public GUIPrincipal() {
+        this.equipoController = EquipoController.getInstancia(); 
+        this.listar = new GUIListar(this.equipoController);
         equipoController.agregarObservador(listar);
         initComponents();
-        
-    }
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -258,12 +257,12 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaDeActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Desarrollado por Rafael Beayne y Juan Andres ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Desarrollado por Rafael Beayne y Juan Andres y Sebastian Tafur ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItemAcercaDeActionPerformed
 
     private void jMenuItemEquipoGYMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEquipoGYMActionPerformed
         // TODO add your handling code here:
-        GUIAdicionarEquipoGYM equipoGYM = new GUIAdicionarEquipoGYM(equipoController);
+        GUIAdicionarEquipoGYM equipoGYM = new GUIAdicionarEquipoGYM();
         equipoGYM.setVisible(true);
         equipoGYM.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItemEquipoGYMActionPerformed
@@ -272,7 +271,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         GUIAdicionarEquipoCardio equipoCardio = new GUIAdicionarEquipoCardio();
         equipoCardio.setVisible(true);
-        setLocationRelativeTo(null);
+        equipoCardio.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItemEquipoCardioActionPerformed
 
     private void jMenuItemEquipoFuerzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEquipoFuerzaActionPerformed
@@ -321,8 +320,9 @@ public class GUIPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        EquipoController equipoController = new EquipoController();
-        new GUIPrincipal(equipoController).setVisible(true);
+        java.awt.EventQueue.invokeLater(() -> {
+            new GUIPrincipal().setVisible(true);
+        });
     }
     
 

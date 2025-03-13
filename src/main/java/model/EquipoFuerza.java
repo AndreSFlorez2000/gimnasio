@@ -8,7 +8,7 @@ package model;
  *
  * @author juana
  */
-public class EquipoFuerza extends EquipoGimnasio {
+public class EquipoFuerza extends Equipo {
     private String tipoDeEjercicio;
     private double pesoMaximo;
     private String material;

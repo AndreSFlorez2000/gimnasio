@@ -10,7 +10,7 @@ import controlador.IAplicable;
  *
  * @author juana
  */
-public class EquipoCardio extends EquipoGimnasio implements IAplicable {
+public class EquipoCardio extends Equipo implements IAplicable {
     private double velocidadMaxima;
     private double nivelResistencia;
     private String tipoPantalla;
